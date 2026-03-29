@@ -2,6 +2,13 @@ clean_segments:
   name: Clean Segments
   description: Start room cleaning for specific room IDs on the Q7.
   fields:
+    device:
+      name: Device
+      description: Name of the Q7 device (optional if you only have one Q7).
+      required: false
+      example: "Staubsauger Obergeschoss"
+      selector:
+        text:
     segments:
       name: Segments
       description: List of room IDs to clean.
@@ -22,7 +29,21 @@ clean_segments:
 stop:
   name: Stop
   description: Stop the Q7 vacuum.
+  fields:
+    device:
+      name: Device
+      description: Name of the Q7 device (optional if you only have one Q7).
+      required: false
+      selector:
+        text:
 
 dock:
   name: Dock
   description: Send the Q7 vacuum back to its dock.
+  fields:
+    device:
+      name: Device
+      description: Name of the Q7 device (optional if you only have one Q7).
+      required: false
+      selector:
+        text:

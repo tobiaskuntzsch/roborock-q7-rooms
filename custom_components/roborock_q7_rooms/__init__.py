@@ -24,12 +24,19 @@ SERVICE_CLEAN_SEGMENTS = "clean_segments"
 SERVICE_STOP = "stop"
 SERVICE_DOCK = "dock"
 
+DEVICE_SCHEMA = {
+    vol.Optional("device"): cv.string,
+}
+
 CLEAN_SEGMENTS_SCHEMA = vol.Schema(
     {
+        **DEVICE_SCHEMA,
         vol.Required("segments"): vol.All(cv.ensure_list, [cv.positive_int]),
         vol.Optional("repeat", default=1): cv.positive_int,
     }
 )
+
+DEVICE_ONLY_SCHEMA = vol.Schema(DEVICE_SCHEMA)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -111,8 +118,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         handle_clean_segments,
         schema=CLEAN_SEGMENTS_SCHEMA,
     )
-    hass.services.async_register(DOMAIN, SERVICE_STOP, handle_stop)
-    hass.services.async_register(DOMAIN, SERVICE_DOCK, handle_dock)
+    hass.services.async_register(DOMAIN, SERVICE_STOP, handle_stop, schema=DEVICE_ONLY_SCHEMA)
+    hass.services.async_register(DOMAIN, SERVICE_DOCK, handle_dock, schema=DEVICE_ONLY_SCHEMA)
 
     return True
 
