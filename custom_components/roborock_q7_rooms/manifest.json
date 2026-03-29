@@ -1,0 +1,11 @@
+{
+  "domain": "roborock_q7_rooms",
+  "name": "Roborock Q7 Room Cleaning",
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": ["roborock"],
+  "documentation": "https://github.com/tobias/roborock-q7-rooms",
+  "iot_class": "cloud_push",
+  "requirements": ["python-roborock==5.0.0"],
+  "version": "0.1.0"
+}

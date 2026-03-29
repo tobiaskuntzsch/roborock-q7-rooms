@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Roborock Q7 Raumreinigung",
+        "description": "Diese Integration fügt Raumreinigungs-Services für deinen Roborock Q7 hinzu. Sie nutzt die Anmeldedaten deiner bestehenden Roborock-Integration - kein separates Login nötig."
+      }
+    },
+    "error": {
+      "no_roborock": "Bitte richte zuerst die offizielle Roborock-Integration ein."
+    }
+  }
+}
