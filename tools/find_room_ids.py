@@ -74,11 +74,18 @@ async def main():
             ])
             print(f"Status: {props.status_name}, Battery: {props.battery}%")
 
-            # Show map info
-            await q7.map.refresh()
-            for entry in q7.map.map_list:
-                name = getattr(entry, 'name', None) or f"Map {entry.id}"
-                print(f"Map: {name} (ID: {entry.id})")
+            # Show map info - get_map_list returns name when available
+            from roborock.roborock_typing import RoborockB01Q7Methods
+            try:
+                map_data = await q7.send(RoborockB01Q7Methods.GET_MAP_LIST, {})
+                if isinstance(map_data, dict):
+                    for entry in map_data.get("map_list", []):
+                        name = entry.get("name", f"Map {entry.get('id')}")
+                        print(f"Map: {name} (ID: {entry.get('id')})")
+            except Exception:
+                await q7.map.refresh()
+                for entry in q7.map.map_list:
+                    print(f"Map ID: {entry.id}")
 
             print(
                 "\nWatching for room IDs..."
